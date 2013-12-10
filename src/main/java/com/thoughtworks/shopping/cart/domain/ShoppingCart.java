@@ -21,7 +21,7 @@ public class ShoppingCart {
 
     public Product findByName(String name) {
         for (int i = 0; i < amount; i++) {
-            if (products[i].getName().equals(name)) {
+            if (name.equals(products[i].getName())) {
                 return products[i];
             }
         }
