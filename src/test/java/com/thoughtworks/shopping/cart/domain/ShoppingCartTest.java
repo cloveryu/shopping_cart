@@ -12,7 +12,7 @@ public class ShoppingCartTest {
     private ShoppingCart shoppingCart;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         shoppingCart = new ShoppingCart();
     }
 
@@ -24,14 +24,14 @@ public class ShoppingCartTest {
     @Test
     public void should_add_product() throws Exception {
         shoppingCart.addProduct(new Product("cake"));
-        assertThat(shoppingCart.getAmount(),is(1));
+        assertThat(shoppingCart.getAmount(), is(1));
     }
 
     @Test
     public void should_find_product_by_name() throws Exception {
         Product product = new Product("cake");
         shoppingCart.addProduct(product);
-        assertThat(shoppingCart.findByName("cake"),is(product));
+        assertThat(shoppingCart.findByName("cake"), is(product));
     }
 
     @Test
@@ -42,11 +42,10 @@ public class ShoppingCartTest {
     @Test
     public void should_num_out_of_range() throws Exception {
         Product product = new Product("cup");
-        for (int i = 0; i <= 10; i++){
+        for (int i = 0; i <= 10; i++) {
             shoppingCart.addProduct(product);
         }
         String warning = "out of range!";
-        assertThat(shoppingCart.addProduct(product),is(warning));
-
+        assertThat(shoppingCart.addProduct(product), is(warning));
     }
 }
