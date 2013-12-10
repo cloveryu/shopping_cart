@@ -1,0 +1,19 @@
+apply plugin: 'idea'
+apply plugin: 'maven'
+apply plugin: 'java'
+
+group = 'com.thoughtworks.ns.collection'
+version = '0.0.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.google.guava:guava:15.0'
+
+    testCompile (
+            'junit:junit:4.11',
+            'org.hamcrest:hamcrest-all:1.3'
+    )
+}
