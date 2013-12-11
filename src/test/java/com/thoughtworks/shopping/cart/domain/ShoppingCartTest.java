@@ -1,5 +1,7 @@
 package com.thoughtworks.shopping.cart.domain;
 
+import org.hamcrest.CoreMatchers;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,13 +41,25 @@ public class ShoppingCartTest {
         assertThat(shoppingCart.findByName("book"), nullValue());
     }
 
+//    @Test
+//    public void should_num_out_of_range() throws Exception {
+//        Product product = new Product("cup");
+//        for (int i = 0; i <= 10; i++) {
+//            shoppingCart.addProduct(product);
+//        }
+//        String warning = "out of range!";
+//        assertThat(shoppingCart.addProduct(product), is(warning));
+//    }
+
     @Test
-    public void should_num_out_of_range() throws Exception {
-        Product product = new Product("cup");
-        for (int i = 0; i <= 10; i++) {
-            shoppingCart.addProduct(product);
-        }
-        String warning = "out of range!";
-        assertThat(shoppingCart.addProduct(product), is(warning));
+    public void should_delete_product_by_name() throws Exception {
+        Product product = new Product("pen");
+        shoppingCart.addProduct(product);
+        Assert.assertThat(shoppingCart.deleteByName("pen"), is(product));
+    }
+
+    @Test
+    public void should_not_delete_product_by_name() throws Exception {
+        Assert.assertThat(shoppingCart.deleteByName("cup"), CoreMatchers.nullValue());
     }
 }
