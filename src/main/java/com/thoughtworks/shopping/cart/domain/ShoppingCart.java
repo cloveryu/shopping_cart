@@ -1,25 +1,25 @@
 package com.thoughtworks.shopping.cart.domain;
 
+import com.thoughtworks.shopping.cart.exception.ShoppingCartOverflowException;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class ShoppingCart {
+    private static final int MAX_NUMBER_OF_PRODUCT = 10;
     private int amount = 0;
-//    private Product[] products = new Product[10];
-    ArrayList<Product> products = new ArrayList<Product>();
+    List<Product> products = new ArrayList<Product>(MAX_NUMBER_OF_PRODUCT);
 
     public int getAmount() {
         return amount;
     }
 
-    public void addProduct(Product product) {
-//        String exception = null;
-//        try{
-            products.add(product);
-            amount++;
-//        } catch (ArrayIndexOutOfBoundsException e) {
-//            exception = "out of range!";
-//        }
-//        return exception;
+    public void addProduct(Product product) throws ShoppingCartOverflowException {
+        if (amount >= MAX_NUMBER_OF_PRODUCT) {
+            throw new ShoppingCartOverflowException("it's too much.");
+        }
+        products.add(product);
+        amount++;
     }
 
     public Product findByName(String name) {
@@ -32,7 +32,7 @@ public class ShoppingCart {
     }
 
     public Product deleteByName(String name) {
-        for (int i = 0; i < amount; i++){
+        for (int i = 0; i < amount; i++) {
             if (products.get(i).getName().equals(name)){
                 Product result = products.get(i);
                 products.remove(i);
