@@ -18,14 +18,14 @@ public class ShoppingCartTest {
 
     @Test
     public void should_get_product_amount() {
-        assertThat(shoppingCart.getAmount(), is(0));
+        assertThat(shoppingCart.getTotalAmount(), is(0));
     }
 
     @Test
     public void should_add_product() {
         Product product = new Product("name");
         shoppingCart.addProduct(product);
-        assertThat(shoppingCart.getAmount(), is(1));
+        assertThat(shoppingCart.getTotalAmount(), is(1));
     }
 
     @Test
@@ -70,9 +70,9 @@ public class ShoppingCartTest {
         shoppingCart.addProduct(cup);
         shoppingCart.addProduct(cup);
         shoppingCart.addProduct(cup);
-        assertThat(shoppingCart.getNum("pen"), is(2));
-        assertThat(shoppingCart.getNum("cup"), is(3));
-        assertThat(shoppingCart.getNum("no"), is(0));
+        assertThat(shoppingCart.getAmountByName("pen"), is(2));
+        assertThat(shoppingCart.getAmountByName("cup"), is(3));
+        assertThat(shoppingCart.getAmountByName("no"), is(0));
     }
 
 }

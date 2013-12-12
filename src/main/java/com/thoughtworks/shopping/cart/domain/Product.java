@@ -13,4 +13,21 @@ public class Product implements Serializable {
     public String getName() {
         return productName;
     }
+
+    @Override
+    public int hashCode() {
+        return productName.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Product that = (Product) obj;
+        return that.productName.equals(productName);
+    }
 }
