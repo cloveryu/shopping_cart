@@ -8,38 +8,39 @@ import java.util.Map;
 
 public class ShoppingCart {
     private int amount = 0;
-    Map<String, Integer> products = new HashMap<String, Integer>();
+    Map<Product, Integer> products = new HashMap<Product, Integer>();
 
     public int getAmount() {
         return amount;
     }
 
-    public void addProduct(String name) throws ShoppingCartOverflowException {
+    public void addProduct(Product product) throws ShoppingCartOverflowException {
         amount++;
-        products.put(name, amount);
+        products.put(product, amount);
     }
 
-    public String findByName(String name) {
+    public Product findByName(String name) {
         Iterator iterator = products.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry entry = (Map.Entry) iterator.next();
             Object key = entry.getKey();
-            if (name.equals(key.toString())) {
-                return key.toString();
+            Product product = (Product)key;
+            if (name.equals(product.getName())) {
+                return product;
             }
         }
         return null;
     }
 
-    public String deleteByName(String name) {
+    public Product deleteByName(String name) {
         Iterator iterator = products.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry entry = (Map.Entry) iterator.next();
             Object key = entry.getKey();
-            if (name.equals(key.toString())) {
-                String result = key.toString();
+            Product product = (Product)key;
+            if (name.equals(product.getName())) {
                 iterator.remove();
-                return result;
+                return product;
             }
         }
         return null;
@@ -51,7 +52,8 @@ public class ShoppingCart {
             Map.Entry entry = (Map.Entry) iterator.next();
             Object key = entry.getKey();
             Object value = entry.getValue();
-            if (name.equals(key.toString())) {
+            Product product = (Product)key;
+            if (name.equals(product.getName())) {
                 Integer result = (Integer)value;
                 return result;
             }

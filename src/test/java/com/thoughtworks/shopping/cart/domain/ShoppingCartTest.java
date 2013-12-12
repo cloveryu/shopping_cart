@@ -23,19 +23,21 @@ public class ShoppingCartTest {
 
     @Test
     public void should_add_product() {
-        shoppingCart.addProduct("cake");
+        Product product = new Product("name");
+        shoppingCart.addProduct(product);
         assertThat(shoppingCart.getAmount(), is(1));
     }
 
     @Test
     public void should_find_product_by_name() {
-        shoppingCart.addProduct("cake");
-        assertThat(shoppingCart.findByName("cake"), is("cake"));
+        Product product = new Product("cake");
+        shoppingCart.addProduct(product);
+        assertThat(shoppingCart.findByName("cake"), is(product));
     }
 
     @Test
     public void should_not_find_Product_by_name() {
-        assertThat(shoppingCart.findByName("book"), nullValue());
+        assertThat(shoppingCart.findByName("book"),nullValue());
     }
 
 //    @Test(expected = ShoppingCartOverflowException.class)
@@ -49,8 +51,9 @@ public class ShoppingCartTest {
 
     @Test
     public void should_delete_product_by_name() {
-        shoppingCart.addProduct("pen");
-        assertThat(shoppingCart.deleteByName("pen"), is("pen"));
+        Product product = new Product("pen");
+        shoppingCart.addProduct(product);
+        assertThat(shoppingCart.deleteByName("pen"), is(product));
     }
 
     @Test
@@ -60,8 +63,9 @@ public class ShoppingCartTest {
 
     @Test
     public void should_get_the_amount_by_find_name() {
+        Product product = new Product("pen");
         for (int i = 0;i < 5; i++) {
-            shoppingCart.addProduct("pen");
+            shoppingCart.addProduct(product);
         }
         assertThat(shoppingCart.getNum("pen"), is(5));
     }
