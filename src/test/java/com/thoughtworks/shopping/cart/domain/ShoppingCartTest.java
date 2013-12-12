@@ -37,7 +37,7 @@ public class ShoppingCartTest {
 
     @Test
     public void should_not_find_Product_by_name() {
-        assertThat(shoppingCart.findByName("book"),nullValue());
+        assertThat(shoppingCart.findByName("book"), nullValue());
     }
 
 //    @Test(expected = ShoppingCartOverflowException.class)
@@ -62,11 +62,17 @@ public class ShoppingCartTest {
     }
 
     @Test
-    public void should_get_the_amount_by_find_name() {
-        Product product = new Product("pen");
-        for (int i = 0;i < 5; i++) {
-            shoppingCart.addProduct(product);
-        }
-        assertThat(shoppingCart.getNum("pen"), is(5));
+    public void should_get_the_amount_by_name() {
+        Product pen = new Product("pen");
+        Product cup = new Product("cup");
+        shoppingCart.addProduct(pen);
+        shoppingCart.addProduct(pen);
+        shoppingCart.addProduct(cup);
+        shoppingCart.addProduct(cup);
+        shoppingCart.addProduct(cup);
+        assertThat(shoppingCart.getNum("pen"), is(2));
+        assertThat(shoppingCart.getNum("cup"), is(3));
+        assertThat(shoppingCart.getNum("no"), is(0));
     }
+
 }
