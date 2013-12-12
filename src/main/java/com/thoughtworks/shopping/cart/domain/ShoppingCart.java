@@ -2,40 +2,57 @@ package com.thoughtworks.shopping.cart.domain;
 
 import com.thoughtworks.shopping.cart.exception.ShoppingCartOverflowException;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class ShoppingCart {
-    private static final int MAX_NUMBER_OF_PRODUCT = 10;
     private int amount = 0;
-    List<Product> products = new ArrayList<Product>(MAX_NUMBER_OF_PRODUCT);
+    Map<String, Integer> products = new HashMap<String, Integer>();
 
     public int getAmount() {
         return amount;
     }
 
-    public void addProduct(Product product) throws ShoppingCartOverflowException {
-        if (amount >= MAX_NUMBER_OF_PRODUCT) {
-            throw new ShoppingCartOverflowException("it's too much.");
-        }
-        products.add(product);
+    public void addProduct(String name) throws ShoppingCartOverflowException {
         amount++;
+        products.put(name, amount);
     }
 
-    public Product findByName(String name) {
-        for (int i = 0; i < amount; i++) {
-            if (name.equals(products.get(i).getName())) {
-                return products.get(i);
+    public String findByName(String name) {
+        Iterator iterator = products.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry entry = (Map.Entry) iterator.next();
+            Object key = entry.getKey();
+            if (name.equals(key.toString())) {
+                return key.toString();
             }
         }
         return null;
     }
 
-    public Product deleteByName(String name) {
-        for (int i = 0; i < amount; i++) {
-            if (products.get(i).getName().equals(name)){
-                Product result = products.get(i);
-                products.remove(i);
+    public String deleteByName(String name) {
+        Iterator iterator = products.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry entry = (Map.Entry) iterator.next();
+            Object key = entry.getKey();
+            if (name.equals(key.toString())) {
+                String result = key.toString();
+                iterator.remove();
+                return result;
+            }
+        }
+        return null;
+    }
+
+    public Integer getNum(String name) {
+        Iterator iterator = products.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry entry = (Map.Entry) iterator.next();
+            Object key = entry.getKey();
+            Object value = entry.getValue();
+            if (name.equals(key.toString())) {
+                Integer result = (Integer)value;
                 return result;
             }
         }
