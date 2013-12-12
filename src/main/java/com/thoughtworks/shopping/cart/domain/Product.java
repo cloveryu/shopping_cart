@@ -5,9 +5,11 @@ import java.io.Serializable;
 public class Product implements Serializable {
 
     private final String productName;
+    private final int productPrice;
 
-    public Product(String productName) {
+    public Product(String productName, int productPrice) {
         this.productName = productName;
+        this.productPrice = productPrice;
     }
 
     public String getName() {
@@ -29,5 +31,9 @@ public class Product implements Serializable {
         }
         final Product that = (Product) obj;
         return that.productName.equals(productName);
+    }
+
+    public int getPrice() {
+        return productPrice;
     }
 }

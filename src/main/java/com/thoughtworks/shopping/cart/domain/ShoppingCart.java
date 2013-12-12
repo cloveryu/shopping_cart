@@ -52,4 +52,13 @@ public class ShoppingCart {
         }
         return 0;
     }
+
+    public int getTotalPrice() {
+        int totalPrice = 0;
+        for (Product product : products.keySet()) {
+            totalPrice += products.get(product) * product.getPrice();
+        }
+        return totalPrice;
+    }
+
 }

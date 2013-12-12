@@ -23,20 +23,20 @@ public class ShoppingCartTest {
 
     @Test
     public void should_add_product() {
-        Product product = new Product("name");
+        Product product = new Product("name", 2);
         shoppingCart.addProduct(product);
         assertThat(shoppingCart.getTotalAmount(), is(1));
     }
 
     @Test
     public void should_find_product_by_name() {
-        Product product = new Product("cake");
+        Product product = new Product("cake", 2);
         shoppingCart.addProduct(product);
         assertThat(shoppingCart.findByName("cake"), is(product));
     }
 
     @Test
-    public void should_not_find_Product_by_name() {
+    public void should_not_find_product_by_name() {
         assertThat(shoppingCart.findByName("book"), nullValue());
     }
 
@@ -51,7 +51,7 @@ public class ShoppingCartTest {
 
     @Test
     public void should_delete_product_by_name() {
-        Product product = new Product("pen");
+        Product product = new Product("pen", 2);
         shoppingCart.addProduct(product);
         assertThat(shoppingCart.deleteByName("pen"), is(product));
     }
@@ -63,8 +63,8 @@ public class ShoppingCartTest {
 
     @Test
     public void should_get_the_amount_by_name() {
-        Product pen = new Product("pen");
-        Product cup = new Product("cup");
+        Product pen = new Product("pen", 2);
+        Product cup = new Product("cup", 2);
         shoppingCart.addProduct(pen);
         shoppingCart.addProduct(pen);
         shoppingCart.addProduct(cup);
@@ -75,4 +75,14 @@ public class ShoppingCartTest {
         assertThat(shoppingCart.getAmountByName("no"), is(0));
     }
 
+    @Test
+    public void should_get_the_total_price_of_products() {
+        Product apple = new Product("apple", 2);
+        Product orange = new Product("orange", 3);
+        shoppingCart.addProduct(apple);
+        shoppingCart.addProduct(apple);
+        shoppingCart.addProduct(orange);
+        assertThat(shoppingCart.getTotalPrice(), is(7));
+
+    }
 }
