@@ -83,6 +83,5 @@ public class ShoppingCartTest {
         shoppingCart.addProduct(apple);
         shoppingCart.addProduct(orange);
         assertThat(shoppingCart.getTotalPrice(), is(7));
-
     }
 }
